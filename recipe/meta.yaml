@@ -1,10 +1,10 @@
 package:
   name: grpc-cpp
-  version: 1.7.2
+  version: {{ environ['VERSION'] }}
 
 source:
   git_url: https://github.com/grpc/grpc.git
-  git_rev: v1.7.2
+  git_rev: v{{ environ['VERSION'] }}
 
 build:
   # If the installation is complex, or different between Unix and Windows, use
@@ -14,15 +14,16 @@ build:
 
 requirements:
   build:
-    - toolchain
+    - {{ compiler('cxx') }}
     - autoconf
     - libtool
-    - c-ares >=1.13.0
-    - protobuf >=3.4.1
+  host:
+    - c-ares >=1.14.0
+    - protobuf >=3.6.0
     - gflags
     - gtest
     - zlib >=1.2.11
   run:
-    - c-ares >=1.13.0
-    - protobuf >=3.4.1
+    - c-ares >=1.14.0
+    - protobuf >=3.6.0
     - zlib >=1.2.11
